@@ -14,24 +14,24 @@ def home():
 @app.route("/main/list", methods=["GET"])
 def item_get():
     item_list = list(db.items.find({}, {'_id': False}))
-    return jsonify({'items': item_list})
+    reply_list = list(db.reply.find({}, {'_id': False}))
+    return jsonify({'items': item_list, 'replys': reply_list})
 
 # 댓글을 저장합니다.
-# @app.route("/main/reply", methods=["post"])
-# def reply_post():
-#     name_receive = request.form['']
-#     comment_receive = request.form['comment_give']
-#
-#
-#     doc = {
-#         'name':name_receive,
-#         'comment':comment_receive
-#     }
-#
-#     db.messages.insert_one(doc)
-#
-#     return jsonify({'msg': '응원댓글을 남겼습니다!'})
+@app.route("/main/reply", methods=["post"])
+def reply_post():
+    reply_receive = request.form['reply_give']
+    num_receive = request.form['num_give']
 
+
+    doc = {
+        'num':int(num_receive),
+        'reply':reply_receive
+    }
+
+    db.reply.insert_one(doc)
+
+    return jsonify({'msg': '댓글을 남겼습니다.!'})
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)
