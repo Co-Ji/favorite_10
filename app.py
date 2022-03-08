@@ -10,7 +10,14 @@ db = client.dbsparta
 def home():
     return render_template('main.html')
 
-# @app.route("/api/main", methods=["post"])
+# 작성목록을 불러옵니다.
+@app.route("/main/list", methods=["GET"])
+def item_get():
+    item_list = list(db.items.find({}, {'_id': False}))
+    return jsonify({'items': item_list})
+
+# 댓글을 저장합니다.
+# @app.route("/main/reply", methods=["post"])
 # def reply_post():
 #     name_receive = request.form['']
 #     comment_receive = request.form['comment_give']
@@ -24,11 +31,6 @@ def home():
 #     db.messages.insert_one(doc)
 #
 #     return jsonify({'msg': '응원댓글을 남겼습니다!'})
-
-@app.route("/main/list", methods=["GET"])
-def item_get():
-    item_list = list(db.items.find({}, {'_id': False}))
-    return jsonify({'items': item_list})
 
 
 if __name__ == '__main__':
