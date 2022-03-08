@@ -23,7 +23,6 @@ def reply_post():
     reply_receive = request.form['reply_give']
     num_receive = request.form['num_give']
 
-
     doc = {
         'num':int(num_receive),
         'reply':reply_receive
