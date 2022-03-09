@@ -64,8 +64,6 @@
                 margin: auto;
                 margin-right: 200px;
                 margin-top: 190px;
-                background-color: #fff;
-                border: 3px solid #ffcc00;
                 border-radius: 10px;
             }
             .wrap h1 {
@@ -166,7 +164,9 @@
                         if (response['result'] == 'success') {
                             alert('회원가입이 완료되었습니다.')
                             window.location.href = '/login'
-                        } else {
+
+
+                        }else {
                             alert(response['msg'])
                         }
                     }
@@ -179,7 +179,7 @@
             }
 
             function is_password(asValue) {
-                var regExp = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z!@#$%^&*]{8,20}$/;
+                var regExp = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z!@#$%^&*]{8,14}$/;
                 return regExp.test(asValue);
 }
 
