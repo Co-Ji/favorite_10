@@ -23,7 +23,6 @@
             /*---------------------------*/
             body {
                 background-color: ivory;
-                min-height: 100vh;
             }
             .basic {
                 position: relative;
@@ -65,9 +64,6 @@
                 margin: auto;
                 margin-right: 200px;
                 margin-top: 190px;
-                background-color: #fff;
-                border: 3px solid #ffcc00;
-                border-radius: 10px;
             }
             .wrap h1 {
                 font: bold 40px 'Gowun Dodum', sans-serif;
@@ -125,12 +121,9 @@
                 margin-top: 30px;
                 margin-left: 460px;
             }
-
-
-
-    .help {
-        color: gray;
-    }
+            .help {
+                color: gray;
+            }
         </style>
         <script>
             /*hasClass('클래스 이름'):선택한 요소에 클래스가 있는지 확인함*/
@@ -167,7 +160,9 @@
                         if (response['result'] == 'success') {
                             alert('회원가입이 완료되었습니다.')
                             window.location.href = '/login'
-                        } else {
+
+
+                        }else {
                             alert(response['msg'])
                         }
                     }
@@ -180,7 +175,7 @@
             }
 
             function is_password(asValue) {
-                var regExp = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z!@#$%^&*]{8,20}$/;
+                var regExp = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z!@#$%^&*]{8,14}$/;
                 return regExp.test(asValue);
 }
 
@@ -247,7 +242,7 @@
     </div>
     <!--조건에 충족하지 않을 경우 문구 띄우기-->
     <p id="help_id" class="help is-hidden is-success"></p>
-    <p id="help-id-login" class="help is-danger"></p>
+
 
     <!--비밀번호-->
     <div class="m_pass">
