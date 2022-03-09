@@ -2,11 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>you_are_my_favorite</title>
+    <title>you_are_my_favoritezz</title>
     <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gugi&family=Jua&family=Song+Myung&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <style>
     .wrap {
         display: flex;
+    }
+    body {
+        background-color: ivory;
+        min-height: 100vh;
     }
     .basic {
             position: relative;
@@ -45,12 +51,27 @@
     .favorite {
         color: navy;
     }
+
     .login {
-        margin: 150px 100px 100px 800px;
+        margin: 150px 100px 200px 900px;
+        width: 300px;
+        /*font: 20px 'NanumGothic';*/
+        text-align:left;
     }
-    .rightbtn {
-        margin-left: 10px;
+    .id {
+        font: 20px 'NanumGothic';
     }
+    .pw {
+        font: 20px 'NanumGothic';
+    }
+    .mybutton {
+        display: flex;
+    }
+    .scd {
+        margin-left: 40px;
+    }
+
+
 
 
     </style>
@@ -89,9 +110,11 @@
 
 
 </head>
-<body bgcolor="#fffff0">
+<body>
 <div style="position: absolute; left: 20px; bottom: 50px;">
+
     <div class=wrap>
+        <div class="box">
         <div class="basic">
             <p class="you">YOU</p>
             <p class="are">ARE</p>
@@ -99,9 +122,10 @@
             <p class="favorite">FAVORITE</P>
         </div>
         <div class=login>
-            <p> ID: <input type="text/" id="userid"></p>
-            <p> PW: <input type="text/" id="userpw"></p>
-            <p>
+            <p class="id"> ID </p>
+            <p><input type="text/" id="userid"></p>
+            <p class="pw"> PASSWORD </p>
+            <input type="text/" id="userpw">
         <div class="form-check">
           <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
           <label class="form-check-label" for="flexCheckChecked">
@@ -110,11 +134,12 @@
         </div>
         </p>
         <div class=mybutton>
-        <button onclick="login()">로그인</button>
-        <button class= rightbtn onclick="sign_up()">회원가입</button>
+        <div class="fst"><button type="button" class="btn btn-warning" onclick="login()">로그인</button></div>
+        <div class="scd"><button type="button" class="btn btn-warning" onclick="sign_up()">회원가입</button></div>
         </div>
     </div>
-
+    </div>
+</div>
 </div>
 </div>
 </body>

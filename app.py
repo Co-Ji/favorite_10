@@ -15,14 +15,13 @@ def home():
 def item_get():
     item_list = list(db.items.find({}, {'_id': False}))
     reply_list = list(db.reply.find({}, {'_id': False}))
-    return jsonify({'items': item_list, 'replys': reply_list})
+    return jsonify({'items': item_list})
 
 # 댓글을 저장합니다.
 @app.route("/main/reply", methods=["post"])
 def reply_post():
     reply_receive = request.form['reply_give']
     num_receive = request.form['num_give']
-
 
     doc = {
         'num':int(num_receive),
