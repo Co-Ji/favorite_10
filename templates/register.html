@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입 페이지</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gowun+Dodum&display=swap"
+          rel="stylesheet">
+
+    <style>
+        /*reset*/
+        body, div, input, label, h1 {
+            margin: 0;
+            padding: 0;
+        }
+
+        /*---------------------------*/
+        body {
+            background-color: ivory;
+        }
+
+        .basic {
+            position: relative;
+            font-family: 'Black Han Sans', sans-serif;
+            font-size: 120px;
+            margin-left: 100px;
+            letter-spacing: 10px;
+            line-height: 20px;
+            margin-bottom: 10px;
+        }
+
+        .you {
+            position: absolute;
+            top: 60px;
+            left: 0;
+            color: gold;
+        }
+
+        .are {
+            position: absolute;
+            top: 190px;
+            left: 0;
+            color: gold;
+        }
+
+        .my {
+            position: absolute;
+            top: 320px;
+            left: 0;
+            color: mediumpurple;
+        }
+
+        .favorite {
+            position: absolute;
+            top: 450px;
+            left: 0;
+            color: navy;
+        }
+
+        /*회원가입 박스*/
+        .wrap {
+            width: 600px;
+            height: 540px;
+            margin: auto;
+            margin-right: 200px;
+            margin-top: 190px;
+        }
+
+        .wrap h1 {
+            font: bold 30px 'Gowun Dodum', sans-serif;
+            text-align: center;
+            padding-top: 30px;
+            padding-bottom: 40px;
+        }
+
+        .wrap label {
+            width: 170px;
+            font: 20px 'NanumGothic';
+            margin-left: 40px;
+            text-align: left;
+        }
+
+        .wrap input {
+            width: 230px;
+            height: 40px;
+            margin-bottom: 30px;
+        }
+        #help_name{
+                height:15px;
+                color:crimson;
+                margin-left: 220px;
+                margin-top: 5px;
+                font-size:13px;
+        }
+        #help_password_fst {
+            /*color: royalblue;*/
+            height:15px;
+            margin-left: 220px;
+            margin-top: 5px;
+            font-size: 13px;
+        }
+
+        #help_password_scd {
+            height:15px;
+            margin-left: 220px;
+            margin-top: 5px;
+            font-size: 13px;
+        }
+
+        #help_id {
+            /*color:crimson;*/
+            height: 15px;
+            margin-left: 220px;
+            margin-top: 5px;
+            font-size: 13px;
+        }
+
+        .m_id button {
+            margin-left: 10px;
+            height: 40px;
+        }
+
+        .m_pass button {
+            background-color: #fff;
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            margin-left: 10px;
+        }
+        .name input{
+            margin-bottom:0;
+        }
+        .m_id input {
+            margin-bottom: 0;
+        }
+        .m_pass input {
+                margin-bottom: 0;
+            }
+        .m_pass2 input {
+            margin-bottom: 0;
+        }
+
+        .back button{
+            float:left;
+            margin-left:360px;
+        }
+        .confirm button {
+            margin-left:16px;
+        }
+
+        .help {
+            color: gray;
+        }
+
+        .is-success {
+            color: blue;
+        }
+
+        .is-danger {
+            color: red;
+        }
+
+    </style>
+    <script>
+        /*hasClass('클래스 이름'):선택한 요소에 클래스가 있는지 확인함*/
+        $(document).ready(function () {
+            $('.m_pass button').on('click', function () {
+                $('input').toggleClass('active');
+                /*만약 input 태그에 active가 추가된다면*/
+                if ($('input').hasClass('active')) {
+                    $('.show').css({backgroundColor: '#ffcc00'})
+                        .prev('input').attr('type', 'text');
+
+                } else {
+                    $('.show').css({backgroundColor: '#fff'})
+                        .prev('input').attr('type', 'password');
+                }
+
+            });
+
+        });
+
+
+        function mid(asValue) {
+            var regExp = /^(?=.*[a-zA-Z])[-a-zA-Z0-9_.]{5,10}$/;
+            return regExp.test(asValue);
+        }
+
+        function mpw(asValue) {
+            var regExp = /^(?=.*\d)(?=.*[a-zA-Z!@#$%^&*])[0-9a-zA-Z!@#$%^&*]{8,14}$/;
+            return regExp.test(asValue);
+        }
+
+        function check_id() {
+            let userid = $(".input-userid").val()
+            console.log(userid)
+
+            if (userid == "") {
+                $("#help_id").text("아이디를 입력해주세요.").removeClass("is-safe").addClass("is-danger")
+                $(".input-userid").focus()
+                return;
+            }
+
+            if (!mid(userid)) {
+                $("#help_id").text("아이디는 영문, 숫자 조합의 5-10자 길이").removeClass("is-safe").addClass("is-danger")
+                $("#input-userid").focus()
+                return;
+            }
+
+            $("#help_id").addClass("is-loading")
+            $.ajax({
+                type: "POST",
+                url: "/api/check_id",
+                data: {
+                    id_give: userid
+                },
+                success: function (response) {
+
+                    if (response["exists"]) {
+                        $("#help_id").text("이미 존재하는 아이디입니다.").removeClass("is-safe").addClass("is-danger")
+                        $(".input-userid").focus()
+                    } else {
+                        $("#help_id").text("사용할 수 있는 아이디입니다.").removeClass("is-danger").addClass("is-safe")
+                    }
+                    $("#help_id").removeClass("is-loading")
+
+                }
+            })
+        }
+
+        function register() {
+            let username = $('.input-username').val()
+            let userid = $(".input-userid").val()
+            let userpassword = $(".input_pw").val()
+            let userpassword_scd = $(".input_pw_scd").val()
+
+            if(username=="") {
+                $("#help_name").text("이름을 입력해주세요.").removeClass("is-success").addClass("is-danger")
+                $(".input-username").focus()
+                return;
+            }
+            if (userid == "") {
+                $("#help_id").text("아이디를 입력해주세요.").removeClass("is-safe").addClass("is-danger")
+                $(".input-userid").focus()
+                return;
+            } else if ($("#help_id").hasClass("is-danger")) {
+                alert("아이디를 다시 확인해주세요.")
+                return;
+            } else if (!$("#help_id").hasClass("is-safe")) {
+                alert("아이디 중복확인을 해주세요.")
+                $(".input-userid").focus()
+                return;
+            }
+
+            if (userpassword == "") {
+                $("#help_password_fst").text("비밀번호를 입력해주세요").removeClass("is-safe").addClass("is-danger")
+                $(".input_pw").focus()
+                return;
+            } else if (!mpw(userpassword)) {
+                $("#help_password_fst").text("비밀번호는 영문, 숫자, 특수문자 조합의 8-14자 길이").removeClass("is-safe").addClass("is-danger")
+                $("#input_pw").focus()
+                return;
+            } else {
+                $("#help_password_fst").text("사용할 수 있는 비밀번호입니다.").removeClass("is-danger").addClass("is-success")
+            }
+            if (userpassword_scd == "") {
+                $("#help_password_scd").text("비밀번호를 입력해주세요.").removeClass("is-safe").addClass("is-danger")
+                $("#input_pw_scd").focus()
+                return;
+            } else if (userpassword_scd != userpassword) {
+                $("#help_password_scd").text("비밀번호가 일치하지 않습니다.").removeClass("is-safe").addClass("is-danger")
+                $("#input_pw_scd").focus()
+                return;
+            } else {
+                $("#help_password_scd").text("비밀번호가 일치합니다.").removeClass("is-danger").addClass("is-success")
+            }
+
+            $.ajax({
+                type: "POST",
+                url: "api/register",
+                data: {
+                    name_give: $('#mname').val(),
+                    id_give: $('#mid').val(),
+                    password_give: $('#mpw').val(),
+                },
+                success: function (response) {
+
+                    if (response['result'] == 'success') {
+                        alert('회원가입이 완료되었습니다.')
+                        window.location.href = '/login'
+                    } else {
+                        alert(response['msg'])
+                    }
+                }
+            })
+        }
+
+        function login_back(){
+            window.location.href = '/login'
+        }
+
+    </script>
+</head>
+<body>
+<!--배경-->
+<div class="basic">
+    <p class="you">YOU</p>
+    <p class="are">ARE</p>
+    <p class="my">MY</P>
+    <p class="favorite">FAVORITE</P>
+</div>
+
+<div class="wrap">
+    <h1>회원가입</h1>
+
+    <!--이름-->
+    <div class="name">
+        <label for="mname">NAME</label>
+        <input type="text" id="mname" class="input input-username">
+        <p id="help_name" class="help"></p>
+    </div>
+
+    <!--아이디-->
+    <div class="m_id">
+        <label for="mid">ID</label>
+        <input class="input input-userid" type="text" id="mid">
+        <button type="button" class="btn btn-warning" onclick="check_id()">중복확인</button>
+    </div>
+    <!--조건에 충족하지 않을 경우 문구 띄우기-->
+    <p id="help_id" class="help is-success"></p>
+
+
+    <!--비밀번호-->
+    <div class="m_pass">
+        <label for="mpw">PASSWORD</label>
+        <input type="password" id="mpw" class="input input_pw">
+        <button class='show'>👀</button>
+    </div>
+    <p id="help_password_fst" class="help is-success"></p>
+
+    <!--비밀번호 확인-->
+    <div class="m_pass2">
+        <label for="mpw2">PASSWORD 확인</label>
+        <input type="password" id="mpw2" class="input input_pw_scd">
+
+        <!--일치할경우 p태그안에 문구 띄우기-->
+
+        <p id="help_password_scd" class="help is-success"></p>
+    </div>
+
+    <div class="back">
+        <button type="button" class="btn btn-warning" onclick="login_back()">돌아가기</button>
+    </div>
+    <div class="confirm">
+        <button type="button" class="btn btn-warning" onclick="register()">가입하기</button>
+    </div>
+</div>
+</div>
+</body>
+</html>
